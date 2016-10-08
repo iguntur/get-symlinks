@@ -1,0 +1,40 @@
+{
+  "name": "get-symlinks",
+  "version": "0.1.0",
+  "description": "Get all symbolic link in directory",
+  "license": "MIT",
+  "repository": "iGuntur/get-symlinks",
+  "author": {
+    "name": "Guntur",
+    "email": "poetra.guntur@gmail.com",
+    "url": "guntur.starmediateknik.com"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "main": "index.js",
+  "keywords": [
+    "get",
+    "glob",
+    "fetch",
+    "links",
+    "symbolic",
+    "symlinks",
+    "utility"
+  ],
+  "dependencies": {
+    "globby": "^6.0.0",
+    "is-symbolic-link": "^0.1.0",
+    "object-assign": "^4.1.0"
+  },
+  "devDependencies": {
+    "ava": "^0.15.2",
+    "xo": "^0.16.0"
+  },
+  "xo": {
+    "esnext": true
+  }
+}
