@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "description": "Get all symbolic link in directory",
   "license": "MIT",
-  "repository": "iGuntur/get-symlinks",
+  "repository": "iguntur/get-symlinks",
   "author": {
     "name": "Guntur",
     "email": "poetra.guntur@gmail.com",
     "url": "guntur.starmediateknik.com"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=0.10.0"
   },
   "scripts": {
     "test": "xo && ava"
@@ -27,14 +27,15 @@
   ],
   "dependencies": {
     "globby": "^6.0.0",
-    "is-symbolic-link": "^0.1.0",
-    "object-assign": "^4.1.0"
+    "is-symbolic-link": "^1.0.0",
+    "object-assign": "^4.1.0",
+    "pinkie-promise": "^2.0.1"
   },
   "devDependencies": {
     "ava": "^0.15.2",
+    "fs-extra": "^0.30.0",
+    "is-arr": "^1.0.1",
+    "tempfile": "^1.1.1",
     "xo": "^0.16.0"
-  },
-  "xo": {
-    "esnext": true
   }
 }

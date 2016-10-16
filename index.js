@@ -1,30 +1,33 @@
 'use strict';
-const path = require('path');
-const globby = require('globby');
-const objectAssign = require('object-assign');
-const isSymbolicLink = require('is-symbolic-link');
+var path = require('path');
+var globby = require('globby');
+var Promise = require('pinkie-promise');
+var objectAssign = require('object-assign');
+var isSymbolicLink = require('is-symbolic-link');
 
-module.exports = (patterns, opts) => new Promise(resolve => {
-	opts = objectAssign({}, opts);
+module.exports = function (patterns, opts) {
+	return new Promise(function (resolve) {
+		opts = objectAssign({}, opts);
+		var symlinks = [];
 
-	return globby(patterns, opts).then(files => {
-		const symlinks = [];
-		files.forEach(f => {
-			f = path.resolve(opts.cwd || '', f);
-			if (isSymbolicLink.sync(f)) {
-				symlinks.push(f);
-			}
+		return globby(patterns, opts).then(function (files) {
+			files.forEach(function (f) {
+				f = path.resolve(opts.cwd || '', f);
+				if (isSymbolicLink.sync(f)) {
+					symlinks.push(f);
+				}
+			});
+
+			resolve(symlinks);
 		});
-
-		resolve(symlinks);
 	});
-});
+};
 
-module.exports.sync = (patterns, opts) => {
+module.exports.sync = function (patterns, opts) {
 	opts = objectAssign({}, opts);
-	const symlinks = [];
+	var symlinks = [];
 
-	globby.sync(patterns, opts).forEach(f => {
+	globby.sync(patterns, opts).forEach(function (f) {
 		f = path.resolve(opts.cwd || '', f);
 		if (isSymbolicLink.sync(f)) {
 			symlinks.push(f);
