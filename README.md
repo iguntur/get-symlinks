@@ -1,4 +1,4 @@
-# get-symlinks [![Build Status](https://travis-ci.org/iGuntur/get-symlinks.svg?branch=master)](https://travis-ci.org/iGuntur/get-symlinks) [![npm](https://img.shields.io/npm/v/get-symlinks.svg?style=flat-square)](https://npmjs.com/package/get-symlinks) [![npm](https://img.shields.io/npm/l/get-symlinks.svg?style=flat-square)](#)
+# get-symlinks [![Build Status](https://travis-ci.org/iguntur/get-symlinks.svg?branch=master)](https://travis-ci.org/iguntur/get-symlinks) [![npm](https://img.shields.io/npm/v/get-symlinks.svg?style=flat-square)](https://npmjs.com/package/get-symlinks) [![npm](https://img.shields.io/npm/l/get-symlinks.svg?style=flat-square)](#)
 
 > Get all symbolic link in directory
 
