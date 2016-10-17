@@ -15,7 +15,9 @@
   "scripts": {
     "test": "xo && ava"
   },
-  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
   "keywords": [
     "get",
     "glob",
