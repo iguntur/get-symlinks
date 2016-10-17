@@ -1,6 +1,6 @@
 {
   "name": "get-symlinks",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Get all symbolic link in directory",
   "license": "MIT",
   "repository": "iguntur/get-symlinks",
