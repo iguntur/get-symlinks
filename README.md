@@ -46,19 +46,19 @@ Returns an array of symlinks paths.
 
 #### patterns
 
-Type: `string`, `array`
+- Type: `string`, `array`
 
-See supported minimatch [patterns](https://github.com/isaacs/minimatch#usage).
+	See supported minimatch [patterns](https://github.com/isaacs/minimatch#usage).
 
-- [Pattern examples with expected matches](https://github.com/sindresorhus/multimatch/blob/master/test.js)
-- [Quick globbing pattern overview](https://github.com/sindresorhus/multimatch#globbing-patterns)
+	- [Pattern examples with expected matches](https://github.com/sindresorhus/multimatch/blob/master/test.js)
+	- [Quick globbing pattern overview](https://github.com/sindresorhus/multimatch#globbing-patterns)
 
 
 #### options
 
-Type: `object`
+- Type: `object`
 
-See the `node-glob` [options](https://github.com/isaacs/node-glob#options).
+	See the `node-glob` [options](https://github.com/isaacs/node-glob#options).
 
 
 ## License
