@@ -63,4 +63,4 @@ See the `node-glob` [options](https://github.com/isaacs/node-glob#options).
 
 ## License
 
-MIT © [Guntur](http://guntur.starmediateknik.com)
+MIT © [Guntur Poetra](http://guntur.starmediateknik.com)
