@@ -61,6 +61,12 @@ Returns an array of symlinks paths.
 	See the `node-glob` [options](https://github.com/isaacs/node-glob#options).
 
 
+## Related
+
+- [del-symlinks](https://github.com/iguntur/del-symlinks) - Delete symlinks using glob.
+- [is-symbolic-link](https://github.com/iguntur/is-symbolic-link) - Check if PATH is symbolic link
+
+
 ## License
 
 MIT © [Guntur Poetra](http://guntur.starmediateknik.com)
