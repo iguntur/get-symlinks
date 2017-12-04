@@ -1,43 +1,40 @@
 {
-  "name": "get-symlinks",
-  "version": "1.0.2",
-  "description": "Get all symbolic link in directory",
-  "license": "MIT",
-  "repository": "iguntur/get-symlinks",
-  "author": {
-    "name": "Guntur Poetra",
-    "email": "poetra.guntur@gmail.com",
-    "url": "guntur.starmediateknik.com"
-  },
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "scripts": {
-    "test": "xo && ava"
-  },
-  "files": [
-    "index.js"
-  ],
-  "keywords": [
-    "get",
-    "glob",
-    "fetch",
-    "links",
-    "symbolic",
-    "symlinks",
-    "utility"
-  ],
-  "dependencies": {
-    "globby": "^6.0.0",
-    "is-symbolic-link": "^1.0.3",
-    "object-assign": "^4.1.0",
-    "pinkie-promise": "^2.0.1"
-  },
-  "devDependencies": {
-    "ava": "^0.16.0",
-    "fs-extra": "^0.30.0",
-    "is-arr": "^1.0.4",
-    "tempfile": "^1.1.1",
-    "xo": "^0.16.0"
-  }
+	"name": "get-symlinks",
+	"version": "1.0.2",
+	"description": "Get all symbolic link in directory",
+	"license": "MIT",
+	"repository": "iguntur/get-symlinks",
+	"author": {
+		"name": "Guntur Poetra",
+		"email": "poetra.guntur@gmail.com",
+		"url": "https://github.com/iguntur"
+	},
+	"engines": {
+		"node": ">=4"
+	},
+	"scripts": {
+		"test": "xo && ava"
+	},
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"get",
+		"glob",
+		"fetch",
+		"links",
+		"symbolic",
+		"symlinks",
+		"utility"
+	],
+	"dependencies": {
+		"globby": "^7.1.1",
+		"is-symbolic-link": "^2.0.3"
+	},
+	"devDependencies": {
+		"ava": "^0.24.0",
+		"fs-extra": "^4.0.2",
+		"tempfile": "^2.0.0",
+		"xo": "^0.18.2"
+	}
 }

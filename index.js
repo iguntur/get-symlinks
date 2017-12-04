@@ -1,38 +1,34 @@
 'use strict';
-var path = require('path');
-var globby = require('globby');
-var Promise = require('pinkie-promise');
-var objectAssign = require('object-assign');
-var isSymbolicLink = require('is-symbolic-link');
+const path = require('path');
+const globby = require('globby');
+const isSymbolicLink = require('is-symbolic-link');
 
 module.exports = function (patterns, opts) {
-	return new Promise(function (resolve) {
-		opts = objectAssign({}, opts);
-		var symlinks = [];
+	opts = Object.assign({}, opts);
 
-		return globby(patterns, opts).then(function (files) {
-			files.forEach(function (f) {
-				f = path.resolve(opts.cwd || '', f);
-				if (isSymbolicLink.sync(f)) {
-					symlinks.push(f);
-				}
-			});
+	return globby(patterns, opts)
+		.then(files => {
+			return Promise.all(files.map(fp => {
+				fp = path.resolve(opts.cwd || '', fp);
 
-			resolve(symlinks);
+				return isSymbolicLink(fp).then(val => {
+					return val ? fp : null;
+				});
+			}));
+		})
+		.then(fp => {
+			return fp.filter(Boolean);
 		});
-	});
 };
 
 module.exports.sync = function (patterns, opts) {
-	opts = objectAssign({}, opts);
-	var symlinks = [];
+	opts = Object.assign({}, opts);
 
-	globby.sync(patterns, opts).forEach(function (f) {
-		f = path.resolve(opts.cwd || '', f);
-		if (isSymbolicLink.sync(f)) {
-			symlinks.push(f);
-		}
-	});
-
-	return symlinks;
+	return globby.sync(patterns, opts)
+		.map(fp => {
+			return path.resolve(opts.cwd || '', fp);
+		})
+		.filter(fp => {
+			return isSymbolicLink.sync(fp);
+		});
 };
