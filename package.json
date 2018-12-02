@@ -10,7 +10,7 @@
 		"url": "https://github.com/iguntur"
 	},
 	"engines": {
-		"node": ">=4"
+		"node": ">=6"
 	},
 	"scripts": {
 		"test": "xo && ava"
@@ -28,7 +28,7 @@
 		"utility"
 	],
 	"dependencies": {
-		"globby": "^7.1.1",
+		"globby": "^8.0.1",
 		"is-symbolic-link": "^2.0.3"
 	},
 	"devDependencies": {
