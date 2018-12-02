@@ -2,7 +2,7 @@ import p from 'path';
 import test from 'ava';
 import fsE from 'fs-extra';
 import tempfile from 'tempfile';
-import fn from './';
+import fn from '.';
 
 const fixtures = ['bar', 'baz', 'foo', 'qux', '.dot'];
 
