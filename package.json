@@ -1,7 +1,7 @@
 {
 	"name": "get-symlinks",
 	"version": "3.0.0",
-	"description": "Get all symbolic link in directory using glob",
+	"description": "Get all symbolic link (file symlinks) using glob",
 	"license": "MIT",
 	"repository": "iguntur/get-symlinks",
 	"author": {
@@ -19,12 +19,14 @@
 		"index.js"
 	],
 	"keywords": [
+		"fetch",
+		"files",
 		"get",
 		"glob",
-		"fetch",
 		"links",
 		"symbolic",
 		"symlinks",
+		"system",
 		"utility"
 	],
 	"dependencies": {

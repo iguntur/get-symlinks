@@ -1,6 +1,13 @@
-# get-symlinks [![Build Status](https://travis-ci.org/iguntur/get-symlinks.svg?branch=master)](https://travis-ci.org/iguntur/get-symlinks)
+# get-symlinks
 
-> Get all symbolic link in directory
+[![Travis CI](https://img.shields.io/travis/iguntur/get-symlinks.svg?style=flat-square)](https://travis-ci.org/iguntur/get-symlinks)
+[![node](https://img.shields.io/node/v/get-symlinks.svg?style=flat-square)](#)
+[![npm](https://img.shields.io/npm/v/get-symlinks.svg?style=flat-square)](https://www.npmjs.org/package/get-symlinks)
+[![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](#)
+
+---
+
+> Get all symbolic link (file symlinks) using glob
 
 
 ## Install
@@ -15,12 +22,10 @@ $ npm install get-symlinks
 ```js
 const getSymlinks = require('get-symlinks');
 
-// async
 getSymlinks(['/home/guntur/.*']).then(symlinks => {
-	console.log(symlinks);
+    console.log(symlinks);
 });
 
-// sync
 const symlinks = getSymlinks.sync(['/home/guntur/.*', '!/home/guntur/.*rc']);
 console.log(symlinks);
 ```
@@ -28,36 +33,26 @@ console.log(symlinks);
 
 ## API
 
-### getSymlinks(patterns, [options])
+### getSymlinks(`patterns`, `[options]`)
 
-Returns a promise for an array of symlinks paths.
+- Params:
+  - `patterns`: `<string | string[]>` _(required)_ - See the [globby patterns](https://github.com/sindresorhus/globby#patterns).
+  - `options`: `<object>` _(optional)_ - See the [globby options](https://github.com/sindresorhus/globby#options).
+- Returns: `<Promise<string[]>` - An array of symlinks paths.
 
-### getSymlinks.sync(patterns, [options])
+### getSymlinks.sync(`patterns`, `[options]`)
 
-Returns an array of symlinks paths.
-
-
-#### patterns
-
-- Type: `string`, `array`
-
-    See supported minimatch [patterns](https://github.com/isaacs/minimatch#usage).
-
-    - [Pattern examples with expected matches](https://github.com/sindresorhus/multimatch/blob/master/test.js)
-    - [Quick globbing pattern overview](https://github.com/sindresorhus/multimatch#globbing-patterns)
-
-
-#### options
-
-- Type: `object`
-
-    See the `node-glob` [options](https://github.com/isaacs/node-glob#options).
+- Params:
+  - `patterns`: `<string | string[]>` _(required)_ - See the [globby patterns](https://github.com/sindresorhus/globby#patterns).
+  - `options`: `<object>` _(optional)_ - See the [globby options](https://github.com/sindresorhus/globby#options).
+- Returns: `<string[]>` - An array of symlinks paths.
 
 
 ## Related
 
 - [del-symlinks](https://github.com/iguntur/del-symlinks) - Delete symlinks using glob.
 - [is-symbolic-link](https://github.com/iguntur/is-symbolic-link) - Check if PATH is symbolic link
+- [make-symlinks](https://github.com/iguntur/make-symlinks) - Create symbolic link (symlinks) using glob.
 
 
 ## License
