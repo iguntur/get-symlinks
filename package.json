@@ -1,6 +1,6 @@
 {
 	"name": "get-symlinks",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Get all symbolic link (file symlinks) using glob",
 	"license": "MIT",
 	"repository": "iguntur/get-symlinks",
