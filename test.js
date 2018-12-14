@@ -1,112 +1,55 @@
-import p from 'path';
+import path from 'path';
 import test from 'ava';
-import fsE from 'fs-extra';
-import tempfile from 'tempfile';
 import fn from '.';
 
-const fixtures = ['bar', 'baz', 'foo', 'qux', '.dot'];
+const fixturePath = path.resolve(__dirname, 'fixtures');
 
-function expected(t, files) {
-	return [].concat(files).map(fl => p.join(t.context.symlinks, fl));
+function expected(links) {
+	return [].concat(links).map(link => path.join(fixturePath, 'symlinks', link));
 }
 
-test.beforeEach(t => {
-	t.context.path = tempfile();
-	t.context.files = p.join(t.context.path, 'files');
-	t.context.folders = p.join(t.context.path, 'folders');
-	t.context.symlinks = p.join(t.context.path, 'symlinks');
-
-	fixtures.forEach(dirName => fsE.mkdirpSync(p.join(t.context.folders, dirName)));
-	fixtures.forEach(fileName => {
-		fsE.ensureFileSync(p.join(t.context.files, fileName));
-		fsE.ensureSymlinkSync(p.join(t.context.files, fileName), p.join(t.context.symlinks, fileName));
-	});
+test('async: return symbolic links, except .*', async t => {
+	const links = await fn(['**/*'], {cwd: fixturePath});
+	t.deepEqual(links, expected(['a.txt', 'b.json']));
 });
 
-test('async: return all symlinks files without `.dot`', async t => {
-	const files = await fn(['*'], {cwd: t.context.symlinks});
-
-	t.true(Array.isArray(files));
-	t.true(files.length > 0);
-	t.true(files.length === 4);
-	t.deepEqual(files, expected(t, ['bar', 'baz', 'foo', 'qux']));
-	t.notDeepEqual(files, expected(t, ['bar', 'baz', 'foo', 'qux', '.dot']));
+test('async: return all symbolic links', async t => {
+	const links = await fn(['**/*', '**/.*'], {cwd: fixturePath});
+	t.deepEqual(links, expected(['a.txt', 'b.json', '.dotrc']));
 });
 
-test('async: return all symlinks files', async t => {
-	const files = await fn(['*', '.*'], {cwd: t.context.symlinks});
-
-	t.true(Array.isArray(files));
-	t.true(files.length > 0);
-	t.true(files.length === 5);
-	t.deepEqual(files, expected(t, ['bar', 'baz', 'foo', 'qux', '.dot']));
-});
-
-test('async: return one symlinks files, `.dot`', async t => {
-	const files = await fn(['.*'], {cwd: t.context.symlinks});
-
-	t.true(Array.isArray(files));
-	t.true(files.length > 0);
-	t.true(files.length === 1);
-	t.deepEqual(files, expected(t, ['.dot']));
+test('async: return one symbolic links, `.dot`', async t => {
+	const actuals = await fn('**/.*', {cwd: fixturePath});
+	t.deepEqual(actuals, expected(['.dotrc']));
 });
 
 test('async: symlinks not found', async t => {
-	const files = await fn(['*'], {cwd: t.context.files});
+	const inFolder = await fn(['**/*'], {cwd: path.join(fixturePath, 'folders')});
+	t.deepEqual(inFolder, []);
 
-	t.true(Array.isArray(files));
-	t.true(files.length === 0);
-	t.notDeepEqual(files, expected(t, ['bar', 'baz', 'foo', 'qux']));
+	const inFile = await fn(['**/*'], {cwd: path.join(fixturePath, 'files')});
+	t.deepEqual(inFile, []);
 });
 
-test('async: symlinks not found too', async t => {
-	const files = await fn(['*'], {cwd: t.context.folders});
-
-	t.true(Array.isArray(files));
-	t.true(files.length === 0);
-	t.notDeepEqual(files, expected(t, ['bar', 'baz', 'foo', 'qux']));
+test('sync: return symbolic links, except .*', t => {
+	const links = fn.sync(['**/*'], {cwd: fixturePath});
+	t.deepEqual(links, expected(['a.txt', 'b.json']));
 });
 
-test('sync: return all symlinks files without `.dot`', t => {
-	const files = fn.sync(['*'], {cwd: t.context.symlinks});
-
-	t.true(Array.isArray(files));
-	t.true(files.length > 0);
-	t.true(files.length === 4);
-	t.deepEqual(files, expected(t, ['bar', 'baz', 'foo', 'qux']));
-	t.notDeepEqual(files, expected(t, ['bar', 'baz', 'foo', 'qux', '.dot']));
+test('sync: return all symbolic links', t => {
+	const links = fn.sync(['**/*', '**/.*'], {cwd: fixturePath});
+	t.deepEqual(links, expected(['a.txt', 'b.json', '.dotrc']));
 });
 
-test('sync: return all symlinks files', t => {
-	const files = fn.sync(['*', '.*'], {cwd: t.context.symlinks});
-
-	t.true(Array.isArray(files));
-	t.true(files.length > 0);
-	t.true(files.length === 5);
-	t.deepEqual(files, expected(t, ['bar', 'baz', 'foo', 'qux', '.dot']));
-});
-
-test('sync: return one symlinks files, `.dot`', t => {
-	const files = fn.sync(['.*'], {cwd: t.context.symlinks});
-
-	t.true(Array.isArray(files));
-	t.true(files.length > 0);
-	t.true(files.length === 1);
-	t.deepEqual(files, expected(t, ['.dot']));
+test('sync: return one links', t => {
+	const links = fn.sync(['**/.*'], {cwd: fixturePath});
+	t.deepEqual(links, expected(['.dotrc']));
 });
 
 test('sync: symlinks not found', t => {
-	const files = fn.sync(['*'], {cwd: t.context.files});
+	const inFolder = fn.sync(['**/*'], {cwd: path.join(fixturePath, 'folders')});
+	t.deepEqual(inFolder, []);
 
-	t.true(Array.isArray(files));
-	t.true(files.length === 0);
-	t.notDeepEqual(files, expected(t, ['bar', 'baz', 'foo', 'qux']));
-});
-
-test('sync: symlinks not found too', t => {
-	const files = fn.sync(['*'], {cwd: t.context.folders});
-
-	t.true(Array.isArray(files));
-	t.true(files.length === 0);
-	t.notDeepEqual(files, expected(t, ['bar', 'baz', 'foo', 'qux']));
+	const inFile = fn.sync(['**/*'], {cwd: path.join(fixturePath, 'files')});
+	t.deepEqual(inFile, []);
 });
